@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Figura 1A interactiva</title>
+  <style>
+    body{
+      font-family:Arial, sans-serif;
+      background:#f7f7f7;
+      margin:0;
+      padding:20px;
+      display:flex;
+      justify-content:center;
+      box-sizing:border-box;
+    }
+
+    .figure-wrapper{
+      max-width:1200px;
+      width:100%;
+    }
+
+    .figure-container{
+      position:relative;
+      width:100%;
+    }
+
+    .figure-background{
+      width:100%;
+      display:block;
+    }
+
+    /* Panel general para cada video */
+    .panel{
+      position:absolute;
+      cursor:pointer;
+      overflow:hidden;
+      border-radius:6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:transparent;
+    }
+
+    /* Ahora el video rellena por completo el panel */
+    video{
+      width:95%;
+      height:95%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .play-icon{
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform:translate(-50%, -50%);
+      font-size:26px;
+      background:rgba(0,0,0,.4);
+      color:#fff;
+      padding:6px 10px;
+      border-radius:50%;
+      pointer-events:none;
+      transition:opacity .2s;
+    }
+
+    .panel.playing .play-icon{
+      opacity:0;
+    }
+
+    /* ------------------------------------------------------ */
+    /* COLUMNAS SIMÉTRICAS (separación 14.7%)                 */
+    /* Fila superior: top 29.8%                               */
+    /* Fila inferior: top 60%                                 */
+    /* ------------------------------------------------------ */
+
+    /* Columna 1: left 7.7%  → videos 01 y 06 */
+    #vid01{
+      top:30%;
+      left:9%;
+      width:13.3%;
+      height:auto;
+    }
+
+    #vid06{
+      top:58%;
+      left:9%;
+      width:13.3%;
+      height:auto;
+    }
+
+    /* Columna 2: left 22.4% → videos 02 y 07 */
+    #vid02{
+      top:30%;
+      left:23.4%;
+      width:13.3%;
+      height:auto;
+    }
+
+    #vid07{
+      top:58%;
+      left:23.4%;
+      width:13.3%;
+      height:auto;
+    }
+
+    /* Columna 3: left 37.1% → videos 03 y 08 */
+    #vid03{
+      top:30%;
+      left:49.2%;
+      width:13.3%;
+      height:auto;
+    }
+
+    #vid08{
+      top:58%;
+      left:49.2%;
+      width:13.3%;
+      height:auto;
+    }
+
+    /* Columna 4: left 51.8% → videos 04 y 09 */
+    #vid04{
+      top:30%;
+      left:63.6%;
+      width:13.3%;
+      height:auto;
+    }
+
+    #vid09{
+      top:58%;
+      left:63.6%;
+      width:13.3%;
+      height:auto;
+    }
+
+    /* Columna 5: left 66.5% → videos 05 y 10 */
+    #vid05{
+      top:30%;
+      left:78%;
+      width:13.3%;
+      height:auto;
+    }
+
+    #vid10{
+      top:58%;
+      left:78%;
+      width:13.3%;
+      height:auto;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="figure-wrapper">
+    <div class="figure-container">
+
+      <img src="Fig-1A.png" class="figure-background">
+
+      <!-- COLUMNA 1 -->
+      <div class="panel" id="vid01" onclick="togglePlay(this)">
+        <video src="video01.mp4" preload="metadata" playsinline></video>
+        <div class="play-icon">▶</div>
+      </div>
+
+      <div class="panel" id="vid06" onclick="togglePlay(this)">
+        <video src="video06.mp4" preload="metadata" playsinline></video>
+        <div class="play-icon">▶</div>
+      </div>
+
+      <!-- COLUMNA 2 -->
+      <div class="panel" id="vid02" onclick="togglePlay(this)">
+        <video src="video02.mp4" preload="metadata" playsinline></video>
+        <div class="play-icon">▶</div>
+      </div>
+
+      <div class="panel" id="vid07" onclick="togglePlay(this)">
+        <video src="video07.mp4" preload="metadata" playsinline></video>
+        <div class="play-icon">▶</div>
+      </div>
+
+      <!-- COLUMNA 3 -->
+      <div class="panel" id="vid03" onclick="togglePlay(this)">
+        <video src="video03.mp4" preload="metadata" playsinline></video>
+        <div class="play-icon">▶</div>
+      </div>
+
+      <div class="panel" id="vid08" onclick="togglePlay(this)">
+        <video src="video08.mp4" preload="metadata" playsinline></video>
+        <div class="play-icon">▶</div>
+      </div>
+
+      <!-- COLUMNA 4 -->
+      <div class="panel" id="vid04" onclick="togglePlay(this)">
+        <video src="video04.mp4" preload="metadata" playsinline></video>
+        <div class="play-icon">▶</div>
+      </div>
+
+      <div class="panel" id="vid09" onclick="togglePlay(this)">
+        <video src="video09.mp4" preload="metadata" playsinline></video>
+        <div class="play-icon">▶</div>
+      </div>
+
+      <!-- COLUMNA 5 -->
+      <div class="panel" id="vid05" onclick="togglePlay(this)">
+        <video src="video05.mp4" preload="metadata" playsinline></video>
+        <div class="play-icon">▶</div>
+      </div>
+
+      <div class="panel" id="vid10" onclick="togglePlay(this)">
+        <video src="video10.mp4" preload="metadata" playsinline></video>
+        <div class="play-icon">▶</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function togglePlay(panel){
+      const vid = panel.querySelector('video');
+      const playing = !vid.paused && !vid.ended && vid.currentTime>0;
+
+      if(playing){
+        vid.pause();
+        panel.classList.remove('playing');
+      }else{
+        vid.play();
+        panel.classList.add('playing');
+      }
+    }
+
+    document.querySelectorAll('video').forEach(vid=>{
+      vid.addEventListener('ended', ()=>{
+        vid.currentTime = 0;
+        vid.parentElement.classList.remove('playing');
+      });
+    });
+  </script>
+
+</body>
+</html>
